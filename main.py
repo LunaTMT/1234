@@ -10,20 +10,27 @@ number = 0
 def Increase():
     global number
     number += 1
+    if number > 256:
+        number = 256
+    
     print("Increasing " + str(number))
     UpdateLights()
 
 def Decrease():
     global number
     number -= 1
+    if number <  0:
+        number = 0
+
     print("Decreasing " + str(number))
     UpdateLights()
 
 def Cycle():
+    global number 
+    number = 0
     for number in range(1, 257):
         for led in leds:
-            led.value = number % 2
-            number = int(number/2)
+            Increase()
         sleep(0.05)
 
     for i in range(4):
